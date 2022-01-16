@@ -9,7 +9,7 @@
 // ek bar sbse upr taki page reload hone sbse phele vo item parse hoke textObj
 // mein aajye or show jaye
 //8. do same thing without using forEach loop by using map method.
-
+//9. 
 
 const addbtn = document.getElementById("adbtn");
 addbtn.addEventListener("click",getvalue);
@@ -47,38 +47,74 @@ function getvalue(){
 }
 
 // show text function
-function showText(){
-    // page reload hone p ye sb invisible na ho isliye
-    // hme inhe ya bhi get krna hoga
-    const textValue = document.querySelector(".text").value;
-    let textContent = localStorage.getItem("textContent"); 
-    console.log(textContent);
-    if(textContent==null){
-        textObj=[];
-        console.log(textObj);
-    }else{
-        textObj = JSON.parse(textContent);
-        console.log(`jo value pass hue hi`,textObj);
-    }
-    // create blank html jisme hm output ko store krenge
-    let html = ''
-    // ab kyuki hmne textObj mein sare value pass kr le h to hm
-    // ispe forEach loop lga skte hain
-    textObj.forEach((element,index) => {
-        html+=`
-        <div class="card mx-2" >
-            <div class="card">
-                    <div class="card-body me-2 ">
-                        <h5 class="card-title">Task${index+1}</h5>
-                        <div class="form-floating">
-                            <textarea class="form-control" id="floatingTextarea" rows="30" style = "height:131px">${element}</textarea>
-                        </div>
-                        <button class="btn btn-primary my-2">Delete Task</button>
-                    </div>
+// function showText(){
+//     // page reload hone p ye sb invisible na ho isliye
+//     // hme inhe ya bhi get krna hoga
+//     const textValue = document.querySelector(".text").value;
+//     let textContent = localStorage.getItem("textContent"); 
+//     console.log(textContent);
+//     if(textContent==null){
+//         textObj=[];
+//         console.log(textObj);
+//     }else{
+//         textObj = JSON.parse(textContent);
+//         console.log(`jo value pass hue hi`,textObj);
+//     }
+//     // create blank html jisme hm output ko store krenge
+//     let html = ''
+//     // ab kyuki hmne textObj mein sare value pass kr le h to hm
+//     // ispe forEach loop lga skte hain
+//     textObj.forEach((element,index) => {
+//         html+=`
+//         <div class="card mx-2" >
+//             <div class="card">
+//                     <div class="card-body me-2 ">
+//                         <h5 class="card-title">Task${index+1}</h5>
+//                         <div class="form-floating">
+//                             <textarea class="form-control" id="floatingTextarea" rows="30" style = "height:131px">${element}</textarea>
+//                         </div>
+//                         <button class="btn btn-primary my-2" onclick = "deleteTask(index)">Delete Task</button>
+//                     </div>
 
-            </div>
-        </div>
-        `
-    });
-    taskContainer.innerHTML = html
-}
+//             </div>
+//         </div>
+//         `
+//     });
+//     taskContainer.innerHTML = html
+// }
+
+function showText(){
+        // page reload hone p ye sb invisible na ho isliye
+        // hme inhe ya bhi get krna hoga
+        const textValue = document.querySelector(".text").value;
+        let textContent = localStorage.getItem("textContent"); 
+        console.log(textContent);
+        if(textContent==null){
+            textObj=[];
+            console.log(textObj);
+        }else{
+            textObj = JSON.parse(textContent);
+            console.log(`jo value pass hue hi`,textObj);
+        }
+        // create blank html jisme hm output ko store krenge
+        let sno = 1
+    let html =  textObj.map((item) => {
+       
+         return`
+         <div class="card mx-2" >
+             <div class="card">
+                     <div class="card-body me-2 ">
+                         <h5 class="card-title">Task${sno++}</h5>
+                         <div class="form-floating">
+                             <textarea class="form-control" id="floatingTextarea" rows="30" style = "height:131px">${item}</textarea>
+                         </div>
+                         <button class="btn btn-primary my-2" onclick = "deleteTask(index)">Delete Task</button>
+                     </div>
+    
+             </div>
+         </div>
+         `
+        //  sno++
+     });
+     taskContainer.innerHTML = html
+    }
