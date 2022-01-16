@@ -41,9 +41,10 @@
                 <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
                 <div class="form-floating">
                     <textarea class="form-control text" id="floatingTextarea" rows="20"></textarea>
-                    <!-- <label for="floatingTextarea"></label> -->
+                    <input type="hidden" id="saveindex">
                 </div>
                 <button class="btn btn-primary my-2" id="adbtn">Add Task</button>
+                <button class="btn btn-success my-2" style="display: none;" id="savebtn">Save Task</button>
                 <button class="btn btn-danger my-2" id="deletebtn">Delete All Task</button>
             </div>
         </div>
@@ -57,9 +58,8 @@
         <h1 class="card-title">Your Task</h1>
     </div>
 
-    <div class="container-lg my-4 d-flex" style="height: auto;"  id="taskContainer">
-        
-
+    <div class="container-lg my-4 d-flex" style="height: auto;" id="taskContainer">
+    
     </div>
         <script src="index.js"></script>
 </body>
