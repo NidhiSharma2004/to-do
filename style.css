@@ -1,3 +1,11 @@
 body{
     background-color: rgb(175, 168, 168);
 }
+#taskContainer{
+    padding: 0 !important;
+    width: 1024px !important;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit,15rem);
+    justify-content: space-around;
+    row-gap: 12px;
+}

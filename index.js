@@ -17,7 +17,7 @@ let taskContainer = document.getElementById("taskContainer");
 showText()
 
 function getvalue(){
-    const textValue = document.querySelector(".text").value;
+    let textValue = document.querySelector(".text").value;
     console.log(`this is text value`,textValue)
     // phele check krenge ki kya "textContent" key mein koi value hai
     let textContent = localStorage.getItem("textContent"); 
@@ -35,11 +35,15 @@ function getvalue(){
     // phir textarea ki jo bhi value hai usse push kr do textObj mein;
     console.log(`jo value push hue h`,textValue);
     textObj.push(textValue);
+
+    // jaise hi value textObj mein pass ho textarea = '' ho jaye
+    document.querySelector(".text").value=''
     console.log(`value push hone ke baad ka array`,textObj);
     // end main jo value text obj mein hai use set kr do localstorage main
     localStorage.setItem("textContent",JSON.stringify(textObj));
     showText()
     }
+  
 }
 
 // show text function
@@ -64,15 +68,13 @@ function showText(){
         html+=`
         <div class="card mx-2" >
             <div class="card">
-                <div class="card" style="width: 18rem;">
                     <div class="card-body me-2 ">
                         <h5 class="card-title">Task${index+1}</h5>
                         <div class="form-floating">
-                            <textarea class="form-control" id="floatingTextarea" rows="30">${element}</textarea>
+                            <textarea class="form-control" id="floatingTextarea" rows="30" style = "height:131px">${element}</textarea>
                         </div>
                         <button class="btn btn-primary my-2">Delete Task</button>
                     </div>
-                </div>
 
             </div>
         </div>
