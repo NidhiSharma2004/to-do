@@ -6,6 +6,6 @@ body{
     width: 1024px !important;
     display: grid !important;
     grid-template-columns: repeat(auto-fit,15rem);
-    justify-content: space-around;
+    justify-content: center;
     row-gap: 12px;
 }
