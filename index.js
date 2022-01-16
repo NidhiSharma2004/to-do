@@ -22,6 +22,7 @@ function getvalue(){
     // phele check krenge ki kya "textContent" key mein koi value hai
     let textContent = localStorage.getItem("textContent"); 
     console.log(textContent);
+    if(textValue!=''){
     if(textContent==null){
         // create a arry name of textObj;
         textObj=[];
@@ -38,7 +39,7 @@ function getvalue(){
     // end main jo value text obj mein hai use set kr do localstorage main
     localStorage.setItem("textContent",JSON.stringify(textObj));
     showText()
-
+    }
 }
 
 // show text function
