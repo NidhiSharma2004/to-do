@@ -10,10 +10,12 @@
 // mein aajye or show jaye
 //8. do same thing without using forEach loop by using map method.
 //9. make a delete fun to delete a specific task, it will take a index that was passed in map method
-
+//10. make a fucntion that delete all the task at one time
 const addbtn = document.getElementById("adbtn");
 addbtn.addEventListener("click", getvalue);
 let taskContainer = document.getElementById("taskContainer");
+let deletebtn = document.getElementById("deletebtn")
+deletebtn.addEventListener("click",deleteAllTask)
 showText()
 
 function getvalue() {
@@ -104,5 +106,14 @@ function deleteTask(index){
     // deleted from local storage
     // and call the function show text again
     localStorage.setItem("textContent", JSON.stringify(textObj));
+    showText()
+}
+
+// deleteAllTask function
+
+function deleteAllTask(){
+    let textContent = localStorage.getItem("textContent");
+    textObj = JSON.parse(textContent);
+    localStorage.clear();
     showText()
 }
