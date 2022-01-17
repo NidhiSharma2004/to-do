@@ -8,5 +8,6 @@ body{
     grid-template-columns: repeat(auto-fit,15rem);
     justify-content: space-evenly;
     row-gap: 12px;
+    column-gap: 12px;
 }
 

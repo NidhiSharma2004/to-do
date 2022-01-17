@@ -16,8 +16,7 @@
 //13. make a fun that run on click on save task btn and add the task
 //14. get the hiden input filed that
 //15. adding search filter
-//16. get the search btn
-//17. get the search place holder value
+//16. get the search input by id
 let addbtn = document.getElementById("adbtn");
 addbtn.addEventListener("click", getvalue);
 let taskContainer = document.getElementById("taskContainer");
@@ -26,8 +25,10 @@ deletebtn.addEventListener("click", deleteAllTask);
 let savebtn = document.getElementById("savebtn");
 savebtn.addEventListener("click", saveTask);
 let saveindex = document.getElementById("saveindex");
+let searchInput = document.getElementById("searchInput")
 let searchbtn = document.getElementById("searchbtn");
-searchbtn.addEventListener('click', filterTask())
+
+
 showText();
 
 function getvalue() {
@@ -57,7 +58,6 @@ function getvalue() {
         localStorage.setItem("textContent", JSON.stringify(textObj));
         showText()
     }
-
 }
 
 // show text function
@@ -144,22 +144,35 @@ function saveTask() {
 
 // filter function
 
-function filterTask() {
-    let searchInputValue = document.getElementById("searchinput").value;
-    let textValue = document.querySelector(".text").value;
-    let textContent = localStorage.getItem("textContent");
-    let textObj = JSON.parse(textContent);
-    console.log(textObj);
-
-    let filterArr = textObj.filter((element, index) => {
-        return `<div class="card">
-                    <div class="card-body me-2">
-                        <h5 class="card-title">Task${index + 1}</h5>
-                        <p>${index}</p>
-                        <button class="btn btn-danger my-2" onclick = "deleteTask(${index})">Delete Task</button>
-                        <button class="btn btn-success my-2" onclick = "editTask(${index})">edit</button>
-                    </div>
-                </div>`
+// firstly w'll listen for input
+searchInput.addEventListener("input",()=>{
+    // get the value of input
+    let searchvalue = searchInput.value
+    // console.log(searchvalue);
+// get all the card that containes task instead of using queryselector
+// we will use getElementByTagsName becoz we need live collection
+// that is html collection so that we can add any operation
+    // let card = document.getElementsByTagName("card");
+    let card = document.getElementsByClassName("card")
+    // console.log(card)
+    // we w'll use Array.from so that we can use it as an array
+    // to get the paragraph text
+    // now every card will pass as elem and w'll get p tag
+    Array.from(card).forEach((elem,index) =>{
+        // kyuki ye phele bar chlne pr jo elem hai uska html collection
+        // 0 zero de rha hai isliye first index skip krenge
+        if(index>0){
+        console.log(index)
+        let cardtxt = elem.getElementsByTagName("p")[0].innerText;
+        // console.log(cardtxt)
+        if(cardtxt.includes(searchvalue)){
+            elem.style.display = "block"
+        }else{
+            elem.style.display = "none"
+        }
+        }
     })
-    taskContainer.innerHTML = filterArr;
-}
+
+
+
+})
