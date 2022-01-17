@@ -24,7 +24,7 @@ deletebtn.addEventListener("click", deleteAllTask)
 let savebtn = document.getElementById("savebtn");
 savebtn.addEventListener("click", saveTask)
 let saveindex = document.getElementById("saveindex");
-showText()
+showText();
 
 function getvalue() {
     let textValue = document.querySelector(".text").value;
@@ -90,7 +90,8 @@ function deleteTask(index) {
     // copy krna padega taki hm yha pr textObj arr ko get kr ske
     let textContent = localStorage.getItem("textContent");
     // console.log(textContent);
-        textObj = JSON.parse(textContent);
+    textObj = JSON.parse(textContent);
+    console.log(textObj)
     // we will splice the textObj from index to lenght 1
     textObj.splice(index, 1)
     // and set local storage after delete the index so that it can be 
@@ -106,7 +107,13 @@ function deleteAllTask() {
     let textContent = localStorage.getItem("textContent");
     textObj = JSON.parse(textContent);
     localStorage.clear();
-    showText()
+    // showText()
+    // console.log(textObj)
+    // if(textObj==null){
+       let html = ''
+       taskContainer.innerHTML = html
+    // }
+    
 }
 
 // edit task function
