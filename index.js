@@ -140,6 +140,8 @@ function saveTask() {
     localStorage.setItem("textContent", JSON.stringify(textObj));
     document.querySelector(".text").value = '';
     showText();
+    savebtn.style.display = "none";
+    addbtn.style.display = "inline";
 }
 
 // filter function
