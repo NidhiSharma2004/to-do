@@ -15,15 +15,19 @@
 //12. on click of edit btn it should be changed into save task btn
 //13. make a fun that run on click on save task btn and add the task
 //14. get the hiden input filed that
-
+//15. adding search filter
+//16. get the search btn
+//17. get the search place holder value
 let addbtn = document.getElementById("adbtn");
 addbtn.addEventListener("click", getvalue);
 let taskContainer = document.getElementById("taskContainer");
-let deletebtn = document.getElementById("deletebtn")
-deletebtn.addEventListener("click", deleteAllTask)
+let deletebtn = document.getElementById("deletebtn");
+deletebtn.addEventListener("click", deleteAllTask);
 let savebtn = document.getElementById("savebtn");
-savebtn.addEventListener("click", saveTask)
+savebtn.addEventListener("click", saveTask);
 let saveindex = document.getElementById("saveindex");
+let searchbtn = document.getElementById("searchbtn");
+searchbtn.addEventListener('click', filterTask())
 showText();
 
 function getvalue() {
@@ -59,15 +63,16 @@ function getvalue() {
 // show text function
 
 function showText() {
+    // we need textvalue
     let textValue = document.querySelector(".text").value;
-  
     let textContent = localStorage.getItem("textContent");
-        textObj = JSON.parse(textContent);
-        console.log(textObj)
-        // if textobj null nhi h to hi run of map method
-        if(textObj!=null){
-    let html = textObj.map((item,index) => {
-        return `
+    // also we need textObj so that we can run map method
+    textObj = JSON.parse(textContent);
+    // console.log(textObj)
+    // if textobj null nhi h to hi run hoga map method
+    if (textObj != null) {
+        let html = textObj.map((item, index) => {
+            return `
              <div class="card">
                      <div class="card-body me-2">
                          <h5 class="card-title">Task${index + 1}</h5>
@@ -76,44 +81,46 @@ function showText() {
                          <button class="btn btn-success my-2" onclick = "editTask(${index})">edit</button>
                      </div>
              </div>`
-  
-    })
-    html = html.join("")
-    taskContainer.innerHTML = html
-}
+
+        })
+        // so that we cannot see the weired , in page
+        html = html.join("");
+        taskContainer.innerHTML = html;
+    }
 }
 
 
-// delete function
+// delete one task function
 
 function deleteTask(index) {
     // copy krna padega taki hm yha pr textObj arr ko get kr ske
     let textContent = localStorage.getItem("textContent");
     // console.log(textContent);
     textObj = JSON.parse(textContent);
-    console.log(textObj)
+    console.log(textObj);
     // we will splice the textObj from index to lenght 1
-    textObj.splice(index, 1)
+    textObj.splice(index, 1);
     // and set local storage after delete the index so that it can be 
     // deleted from local storage
     // and call the function show text again
     localStorage.setItem("textContent", JSON.stringify(textObj));
-    showText()
+    showText();
 }
 
 // deleteAllTask function
 
 function deleteAllTask() {
+    // first of all we have to get all the value of local storage
     let textContent = localStorage.getItem("textContent");
+    // second we have to pass all the value in textObj array
     textObj = JSON.parse(textContent);
+    // after this we can clear all the local storage
     localStorage.clear();
-    // showText()
     // console.log(textObj)
-    // if(textObj==null){
-       let html = ''
-       taskContainer.innerHTML = html
-    // }
-    
+    // after clear storage we can do hmtl blank
+    let html = '';
+    // so we need to make taskcontainer html blank
+    taskContainer.innerHTML = html;
 }
 
 // edit task function
@@ -127,9 +134,32 @@ function editTask(index) {
 }
 
 // write functon that save edit task
+
 function saveTask() {
     textObj[saveindex] = document.querySelector(".text").value;
     localStorage.setItem("textContent", JSON.stringify(textObj));
     document.querySelector(".text").value = '';
-    showText()
+    showText();
+}
+
+// filter function
+
+function filterTask() {
+    let searchInputValue = document.getElementById("searchinput").value;
+    let textValue = document.querySelector(".text").value;
+    let textContent = localStorage.getItem("textContent");
+    let textObj = JSON.parse(textContent);
+    console.log(textObj);
+
+    let filterArr = textObj.filter((element, index) => {
+        return `<div class="card">
+                    <div class="card-body me-2">
+                        <h5 class="card-title">Task${index + 1}</h5>
+                        <p>${index}</p>
+                        <button class="btn btn-danger my-2" onclick = "deleteTask(${index})">Delete Task</button>
+                        <button class="btn btn-success my-2" onclick = "editTask(${index})">edit</button>
+                    </div>
+                </div>`
+    })
+    taskContainer.innerHTML = filterArr;
 }
