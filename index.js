@@ -68,22 +68,17 @@ function showText() {
         if(textObj!=null){
     let html = textObj.map((item,index) => {
         return `
-         <div class="card mx-2" >
              <div class="card">
                      <div class="card-body me-2">
                          <h5 class="card-title">Task${index + 1}</h5>
-                         <div class="form-floating">
-                             <textarea class="form-control" id="floatingTextarea" rows="30" style = "height:131px">${item}</textarea>
-                         </div>
+                            <p>${item}</p>
                          <button class="btn btn-danger my-2" onclick = "deleteTask(${index})">Delete Task</button>
                          <button class="btn btn-success my-2" onclick = "editTask(${index})">edit</button>
                      </div>
-             </div>
-        </div>`  
+             </div>`
+  
     })
-    console.log(html);
-    html.join(',')
-
+    html = html.join("")
     taskContainer.innerHTML = html
 }
 }

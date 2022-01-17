@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -23,19 +23,42 @@
              <div class="card">
                      <div class="card-body me-2 ">
                          <h5 class="card-title">Task${index + 1}</h5>
-                         <div class="form-floating">
-                             <textarea class="form-control" id="floatingTextarea" rows="30" style = "height:131px">${item}</textarea>
-                         </div>
+                        <p>${item}</p>
                          <button class="btn btn-danger my-2" onclick = "deleteTask(${index})">Delete Task</button>
                          <button class="btn btn-success my-2" onclick = "editTask(${index})">edit</button>
                      </div>
              </div>
          </div>`
     })
-    taskContainer.innerHTML = html
+    console.log(html)
+    let htmlplus = html.join("");
+    taskContainer.innerHTML = htmlplus
+//     const last = input.pop();
+// const result = input.join(', ') + ' and ' + last;
+// console.log(result);
 }
 
 mapFun(textObj)
+
+//     function task(arr){    
+//     let html = ''
+//     arr.forEach((index,element)=>{
+//         html += `
+//         <div class="card mx-2" >
+//               <div class="card">
+//                       <div class="card-body me-2 ">
+//                           <h5 class="card-title">Task${index + 1}</h5>
+//                          <p>${element}</p>
+//                           <button class="btn btn-danger my-2" onclick = "deleteTask(${index})">Delete Task</button>
+//                           <button class="btn btn-success my-2" onclick = "editTask(${index})">edit</button>
+//                       </div>
+//               </div>
+//           </div>`
+//     })
+//     taskContainer.innerHTML = html
+// }
+// task(textObj)
+    
     </script>
 </body>
-</html> -->
+</html>
