@@ -59,52 +59,43 @@ function getvalue() {
 // show text function
 
 function showText() {
-    // page reload hone p ye sb invisible na ho isliye
-    // hme inhe ya bhi get krna hoga
-    const textValue = document.querySelector(".text").value;
+    let textValue = document.querySelector(".text").value;
+  
     let textContent = localStorage.getItem("textContent");
-    // console.log(textContent);
-    if (textContent == null) {
-        textObj = [];
-        // console.log(textObj);
-    } else {
         textObj = JSON.parse(textContent);
-        // console.log(`jo value pass hue hi`, textObj);
-    }
-    // create blank html jisme hm output ko store krenge
-     // isme hm card tittle mein index+1 krenge so that counting will be started from one
+        console.log(textObj)
+        // if textobj null nhi h to hi run of map method
+        if(textObj!=null){
     let html = textObj.map((item,index) => {
         return `
          <div class="card mx-2" >
              <div class="card">
-                     <div class="card-body me-2 ">
+                     <div class="card-body me-2">
                          <h5 class="card-title">Task${index + 1}</h5>
                          <div class="form-floating">
                              <textarea class="form-control" id="floatingTextarea" rows="30" style = "height:131px">${item}</textarea>
                          </div>
                          <button class="btn btn-danger my-2" onclick = "deleteTask(${index})">Delete Task</button>
-                         <button class="btn btn-success" my-2" onclick = "editTask(${index})">edit</button>
+                         <button class="btn btn-success my-2" onclick = "editTask(${index})">edit</button>
                      </div>
              </div>
-         </div>`
+        </div>`  
     })
+    console.log(html);
+    html.join(',')
+
     taskContainer.innerHTML = html
 }
+}
+
 
 // delete function
 
 function deleteTask(index) {
     // copy krna padega taki hm yha pr textObj arr ko get kr ske
-    const textValue = document.querySelector(".text").value;
     let textContent = localStorage.getItem("textContent");
     // console.log(textContent);
-    if (textContent == null) {
-        textObj = [];
-        // console.log(textObj);
-    } else {
         textObj = JSON.parse(textContent);
-        // console.log(`jo value pass hue hi`, textObj);
-    }
     // we will splice the textObj from index to lenght 1
     textObj.splice(index, 1)
     // and set local storage after delete the index so that it can be 
